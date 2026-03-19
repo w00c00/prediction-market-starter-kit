@@ -32,7 +32,7 @@ ENV NEXT_PUBLIC_POLYGON_RPC_URL=$NEXT_PUBLIC_POLYGON_RPC_URL
 RUN pnpm build
 
 # Production stage
-FROM docker.fnnas.com/library/node:22-alpine AS runner
+FROM node:22-alpine AS runner
 
 WORKDIR /app
 
