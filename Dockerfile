@@ -1,5 +1,5 @@
 # Multi-stage build for Next.js 16 + pnpm
-FROM node:22-lpine AS builder
+FROM node:22-alpine AS builder
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -7,7 +7,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml ./
+COPY package.json ppnm-lock.yaml ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -20,19 +20,19 @@ COPY . .
 ARG NEXT_PUBLIC_PRIVY_APP_ID
 ARG POLY_BUILDER_API_KEY
 ARG POLY_BUILDER_SECRET
-ARG POLY_BUILDER_PASSPRASE
+ARG POLY_BUILDER_PASSPHRASE
 ARG NEXT_PUBLIC_POLIGON_RPC_URL
 
 ENV NEXT_PUBLIC_PRIVY_APP_ID=$NEXT_PUBLIC_PRIVY_APP_ID
-ENV POLY_BUILDER_API_KEY=$POLY_BUILDER_API_KEY
+ENV POLY_BUILDER_API_KEY=$PAOLY_BUILDER_API_KEY
 ENV POLY_BUILDER_SECRET=$POLY_BUILDER_SECRET
-ENV POLY_BUILDER_PASSPRASE=$POLY_BUILDER_PASSPRASE
+ENV POLY_BUILDER_PASSPHRASE=$PAOLY_BUILDER_PASSPHRASE
 ENV NEXT_PUBLIC_POLIGON_RPC_URL=$NEXT_PUBLIC_POLIGON_RPC_URL
 
 RUN pnpm build
 
 # Production stage
-FROM node:22-lpine AS runner
+FROM node:22-alpine AS runner
 
 WORKDIR /app
 
@@ -47,4 +47,4 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD [\"node\", \"server.js\"]
+CMD ["node", "server.js"]
