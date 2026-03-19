@@ -1,5 +1,5 @@
 # Multi-stage build for Next.js 16 + pnpm
-FROM docker.fnnas.com/library/node:22-alpine AS builder
+FROM node:22-alpine AS builder
 
 # Install pnpm
 RUN npm install -g pnpm
