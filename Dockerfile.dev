@@ -30,4 +30,4 @@ ENV NEXT_PUBLIC_POLYGON_RPC_URL=https://polygon-rpc.com
 
 EXPOSE 3000
 
-CMD ["pnpm", "dev"]
+CMD ["pnpm", "run", "docker"]
