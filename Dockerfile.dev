@@ -1,13 +1,14 @@
 # 使用 Node 开发服务器直接运行（跳过构建）
 FROM node:22-alpine
 
-# Install pnpm
+# Cache buster: 2026-03-20-0242
+RUN echo "Cache busted"
 RUN npm install -g pnpm
 
 WORKDIR /app
 
-# Cache bust to force fresh build
-ARG CACHEBUST=2
+# Cache buster - force rebuild
+ARG CACHEBUST=3
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
