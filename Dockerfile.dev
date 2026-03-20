@@ -1,0 +1,29 @@
+# 使用 Node 开发服务器直接运行（跳过构建）
+FROM node:22-alpine
+
+# Install pnpm
+RUN npm install -g pnpm
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
+# Set environment
+ENV NODE_ENV=development
+ENV PORT=3000
+ENV NEXT_PUBLIC_PRIVY_APP_ID=placeholder
+ENV POLY_BUILDER_API_KEY=placeholder
+ENV POLY_BUILDER_SECRET=placeholder
+ENV POLY_BUILDER_PASSPHRASE=placeholder
+ENV NEXT_PUBLIC_POLYGON_RPC_URL=https://polygon-rpc.com
+
+EXPOSE 3000
+
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]
