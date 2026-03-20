@@ -6,6 +6,9 @@ RUN npm install -g pnpm
 
 WORKDIR /app
 
+# Cache bust to force fresh build
+ARG CACHEBUST=2
+
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
